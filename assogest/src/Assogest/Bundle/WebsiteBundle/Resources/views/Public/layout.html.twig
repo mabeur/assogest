@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>{{ assogest_website_name }}</title>
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.no-icons.min.css" rel="stylesheet">
+        <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+        <!--[if IE 7]>
+        	<link href="//netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome-ie7.css" rel="stylesheet">
+		<![endif]-->
+		
+		{% stylesheets 'bundles/assogestwebsite/css/*' filter='cssrewrite' %}
+			<link rel="stylesheet" href="{{ asset_url }}" />
+		{% endstylesheets %}
+                
+        <style>
+		        
+        </style>
+    </head>
+    <body>
+        
+    	<header>
+	        <nav class="navbar navbar-default navbar-inverse navbar-fixed-top" role="navigation">
+	        	<div class="container">
+		        	<div class="navbar-header">
+			        	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex1-collapse">
+					      <span class="sr-only">Toggle navigation</span>
+					      <span class="icon-bar"></span>
+					      <span class="icon-bar"></span>
+					      <span class="icon-bar"></span>
+					    </button>
+		        	{% if app.user %}
+						<a href="{{ path('fos_user_security_logout') }}" class="visible-xs btn btn-warning btn-small pull-right navbar-btn " style="margin-right:10px;" >Déconnexion</a>
+						<a href="{{ path('fos_user_profile_show') }}" class="visible-xs btn btn-default btn-small pull-right navbar-btn " style="margin-right:10px;" >{{ app.user.presentation }}</a>
+		        		{% else %}
+						<a href="{{ path('fos_user_security_login') }}" class=" visible-xs btn btn-primary btn-small pull-right navbar-btn " style="margin-right:10px;" >Connexion</a>
+		        	{% endif %}
+		        		<a class="navbar-brand" href="/">{{ assogest_website_name }}</a>
+		        	</div>
+					<div class="collapse navbar-collapse" id="navbar-ex1-collapse">
+							
+			        		<ul class="nav navbar-nav">
+					        	 <li><a href="{{ path('assogest_website_presentation') }}">Présentation</a></li>
+							     <li><a href="{{ path('assogest_website_events') }}">Evènements</a></li>
+							     <li><a href="{{ path('assogest_website_members') }}">Membres</a></li>
+							     <li><a href="{{ path('assogest_website_documents') }}">Documents</a></li>
+					        </ul>
+		        	{% if app.user %}
+						<a href="{{ path('fos_user_security_logout') }}" class="hidden-xs btn btn-warning btn-small pull-right navbar-btn " style="margin-right:10px;" >Déconnexion</a>
+						<a href="{{ path('fos_user_profile_show') }}" class="hidden-xs btn btn-default btn-small pull-right navbar-btn " style="margin-right:10px;" >{{ app.user.presentation }}</a>
+						{% else %}
+						<a href="{{ path('fos_user_security_login') }}" class="hidden-xs btn btn-primary btn-small pull-right navbar-btn " style="margin-right:10px;" >Connexion</a>
+		        	{% endif %}
+							   
+					</div>
+				</div>
+	        </nav>
+	        
+        </header>
+        
+		<div class="container">
+			{% block body %}
+			 
+			{% endblock %}
+		</div>
+			
+        
+        <footer>
+	       
+        </footer>
+        
+        	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+			<script src="//netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+			
+			{% javascripts '@AssogestWebsiteBundle/Resources/public/js/*' %}
+			    <script type="text/javascript" src="{{ asset_url }}"></script>
+			{% endjavascripts %}
+
+			{% block javascript %}
+			 
+			{% endblock %}
+</body>
+</html>

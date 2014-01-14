@@ -1,0 +1,123 @@
+{% extends 'AssogestWebsiteBundle::Public/layout.html.twig' %}
+
+{% block body %}
+
+	
+	<h1>Membres {% if 'ROLE_ADMIN' in app.user.roles %} - <a href="{{ path('admin_member_create') }}" class="btn btn-primary btn-xs">Créer un membre</a>{% endif %}</h1>
+
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs">
+	  <li class="active"><a href="#map" data-toggle="tab">Carte</a></li>
+	  <li><a href="#list" data-toggle="tab">Liste</a></li>
+	</ul>
+	
+	<!-- Tab panes -->
+	<div class="tab-content">
+	
+	  <div class="tab-pane" id="list">
+		  <table class="table">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Nom</th>
+					<th>Prénom</th>
+					<th>Email</th>
+					<th>Address</th>
+				</tr>
+			</thead>
+			
+			<tbody>
+				{% for member in membersList %}
+				 <tr>
+				 	<td>
+				 		<a href="{{ path('admin_member_create', {id:member.id}) }}">
+				 			<img src="{{ member.avatar ? member.avatar : '/assogest/bundles/assogestwebsite/img/mini_no_avatar.png' }}" class="thumbnail" width="32"/>
+				 		</a>
+				 	</td>
+				 	<td>{{ member.lastname }}</td>
+				 	<td>{{ member.firstname }}</td>
+				 	<td>{{ member.email }}</td>
+				 	<td>{{ member.address }}</td>
+				 </tr>
+				{% endfor %}
+			
+			</tbody>
+		
+		</table>
+	  
+	  </div>
+	  <div class="tab-pane active" id="map">
+	  
+			<div id="map_canvas" style="width: 100%; height: 500px"></div>
+	  
+	  </div>
+	</div>
+	
+	
+	
+
+
+{% endblock %}
+
+
+{% block javascript %}
+ 
+<script type="text/javascript" src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+<script type="text/javascript">
+
+
+    var latlng = new google.maps.LatLng(48.683333, 6.2);
+    var map;
+    
+	function initialize() {
+		var myOptions = {
+			zoom : 4,
+			center : latlng,
+			mapTypeId : google.maps.MapTypeId.ROADMAP
+		};
+		map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+		
+	}
+
+	function addPeoplePosition(address, name, image){
+
+		// get localisation
+		var addressInformations = $.getJSON('http://maps.google.com/maps/api/geocode/json?address='+address+'&sensor=false', function(data){
+
+			if( data.status == 'OK' ){
+				var geolocalisation = data.results[0].geometry.location;
+				var lat = geolocalisation.lat;
+				var lng = geolocalisation.lng;
+
+				var icon = {
+						  url: image,
+						  size: new google.maps.Size(71, 71),
+						  origin: new google.maps.Point(0, 0),
+						  anchor: new google.maps.Point(17, 34),
+						  scaledSize: new google.maps.Size(25, 25)
+					};
+				
+			    var peoplelatlng = new google.maps.LatLng(lat, lng);
+				var marker = new google.maps.Marker({
+				      position: peoplelatlng,
+				      animation: google.maps.Animation.DROP,
+				      icon: icon,
+				      title:name
+				  });
+			    marker.setMap(map);
+			}
+		});
+		
+	}
+			
+	$(function(){
+		initialize();
+		
+		{% for member in membersList %}		
+			addPeoplePosition("{{ member.address|e('js') }}","{{ member.presentation }}","{{ member.avatar ? member.avatar : '/assogest/bundles/assogestwebsite/img/mini_no_avatar.png' }}");
+		{% endfor %}
+				
+	});
+
+</script>
+{% endblock %}

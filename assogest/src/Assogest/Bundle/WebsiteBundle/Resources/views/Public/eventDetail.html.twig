@@ -1,0 +1,132 @@
+{% extends 'AssogestWebsiteBundle::Public/layout.html.twig' %}
+
+{% block body %}
+
+	<style>
+	<!--
+		h2 { margin: 0}
+		.tab-pane { padding-top: 20px; }
+	-->
+	</style>
+	
+	<a href="{{ path('assogest_website_events') }}" class="btn btn-default btn-xs">Retour</a><br />
+	<hr />
+	
+	
+	<!-- Nav tabs -->
+	<ul class="nav nav-tabs">
+	  <li class="active"><a href="#detail" data-toggle="tab">Detail</a></li>
+	  <li><a href="#users" data-toggle="tab">Participants <span class="badge">{{ event.users|length + event.guests|length }}</span></a></li>
+	  <li><a href="#comments" data-toggle="tab">Commentaires <span class="badge">{{ event.comments|length }}</span></a></li>
+	  <li><a href="#documents" data-toggle="tab">Documents <span class="badge">{{ event.documents|length }}</span></a></li>
+	</ul>
+	
+	<!-- Tab panes -->
+	<div class="tab-content">
+	
+	  <div class="tab-pane active" id="detail">
+	  	<h2 class="pull-left">{{ event.name }} &nbsp; </h2>
+		{% if 'ROLE_ADMIN' in app.user.roles %}<a href="{{ path('admin_event_create', {id:event.id}) }}" class="btn btn-primary btn-xs pull-left">EDITER</a>{% endif %}
+		<div class="clearfix"></div>	
+			
+			<br/>
+		Date : {{ event.dueDate|date('d/m/Y') }}<br />
+		Adresse : {{ event.address }}<br />
+		Prix membre : {{ event.memberPrice }}€<br/>
+		Prix invité : {{ event.visitorPrice }}€<br/>
+		
+		
+		<blockquote>
+			{{ event.description }}
+		
+		</blockquote>
+	  </div>
+	  
+	  
+		<div class="tab-pane" id="documents">
+			<h2 class="pull-left">Documents <span class="badge">{{ event.documents|length }}</span>  &nbsp; </h2>
+			{% if 'ROLE_ADMIN' in app.user.roles %}<a href="{{ path('admin_document_create', {event_id:event.id}) }}" class="pull-left btn btn-primary btn-xs">Ajouter</a>{% endif %}
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th>Nom</th>
+						<th>Description</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					{% for document in event.documents %}
+				 <tr>
+				 	<td>{{ document.created|date('d/m/Y') }}</td>
+				 	<td>{{ document.name }}</td>
+				 	<td>{{ document.description }}</td>
+				</tr>
+				{% endfor %}
+				
+				</tbody>
+			
+			</table>
+		</div>
+	
+	<div class="tab-pane" id="users">
+		<div class="row">
+			<div class="col-xs-6">
+			
+			
+				<h2>Participants <span class="badge">{{ event.users|length }}</span>
+				{% if app.user not in event.users %}
+					<a href="{{ path('assogest_website_event_subscribe', {id:event.id}) }}" class="btn btn-primary btn-xs">Je veux participer</a>
+				{% endif %}	
+				</h2>
+				
+				<ul>
+					{% for member in event.users %}
+						<li>{{ member.lastname }} {{ member.firstname }} {% if member == app.user %}&nbsp; - <a href="{{ path('assogest_website_event_unsubscribe', {id:event.id}) }}" class="btn btn-danger btn-xs">Je ne veux plus participe</a> {% endif %}</li>
+					{% endfor %}
+				</ul>
+			</div>
+			<div class="col-xs-6">
+				<h2>Invités <span class="badge">{{ event.guests|length }}</span> <a href="{{ path('assogest_website_event_invite', {id:event.id} ) }}" class="btn btn-xs btn-primary">J'invite</a></h2>
+				
+				<ul>
+					{% for guest in event.guests %}
+						<li>{{ guest.name }} {% if guest.user == app.user %} - <a href="{{ path('assogest_website_event_uninvite', {id:guest.id} ) }}">Supprimer</a>{% endif %}</li>
+					{% endfor %}
+				</ul>
+			
+			</div>
+		</div>
+	</div>
+	
+	<div class="tab-pane" id="comments">
+		<h2 class=" pull-left">Commentaires &nbsp; </h2>
+		<a href="{{ path('assogest_event_comment', {event_id:event.id}) }}" class="btn btn-primary btn-xs pull-left">Commenter</a>
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<th style="width:20%">De</th>
+					<th>Commentaire</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for comment in event.comments %}
+				<tr>
+					<td>
+						{{ comment.user.presentation }}<br />
+						<img src="{{ comment.user.avatar ? comment.user.avatar : '/assogest/bundles/assogestwebsite/img/mini_no_avatar.png' }}" class="thumbnail" width="64"/>
+					</td>
+					<td>
+						<p class="pull-right">{{ comment.record|date('d/m/Y') }}</p>
+						{{ comment.content }}
+					</td>
+				</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+		
+	
+	</div>
+	
+
+{% endblock %}

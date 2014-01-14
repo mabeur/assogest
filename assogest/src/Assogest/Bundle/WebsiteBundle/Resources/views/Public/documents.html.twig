@@ -1,0 +1,32 @@
+{% extends 'AssogestWebsiteBundle::Public/layout.html.twig' %}
+
+{% block body %}
+
+<h1>Documents 
+{% if 'ROLE_ADMIN' in app.user.roles %} - <a href="{{ path('admin_document_create') }}" class="btn btn-primary btn-xs">Ajouter un document</a> {% endif %}
+</h1>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>Nom</th>
+				<th>Description</th>
+				<th>Evènement</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			{% for document in documentsList %}
+			 <tr>
+			 	<td>{{ document.created|date('d/m/Y') }}</td>
+			 	<td>{{ document.name }}</td>
+			 	<td>{{ document.description }}</td>
+			 	<td>{% if document.event %}  <a href="{{ path('assogest_website_event_detail', {id:document.event.id}) }}">{{ document.event.name }}</a> {% else %} - {% endif %}</td>
+			 </tr>
+			{% endfor %}
+		
+		</tbody>
+	
+	</table>
+
+{% endblock %}

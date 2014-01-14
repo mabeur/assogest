@@ -1,0 +1,73 @@
+{% extends 'AssogestWebsiteBundle::Public/layout.html.twig' %}
+
+{% block body %}
+	
+	<h1>Evènements
+	{% if 'ROLE_ADMIN' in app.user.roles %} - <a href="{{ path('admin_event_create') }}" class="btn btn-primary btn-xs">Créer un évènement</a>{% endif %}
+	</h1>
+
+	<div class="row">
+		<div class="col-sm-12">
+			<h3> A venir </h3>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						<th>Date</th>
+						<th>Address</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					{% for event in futurEventsList %}
+					 <tr>
+					 	<td>
+					 		<a href="{{ path('assogest_website_event_detail', {id:event.id}) }}">
+						 		<h4>{{ event.name }}</h4>
+						 		{{ event.description }}
+					 		</a>
+					 	</td>
+					 	<td>{{ event.dueDate|date('d/m/Y') }}</td>
+					 	<td>{{ event.address }}</td>
+					 </tr>
+					{% endfor %}
+				
+				</tbody>
+			
+			</table>
+		</div>
+		
+		<div class="col-sm-12">
+			<h3> Passés </h3>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Date</th>
+						<th>Nom</th>
+						<th>Address</th>
+					</tr>
+				</thead>
+				
+				<tbody>
+					{% for event in pastEventsList %}
+					 <tr>
+					 	<td>
+					 		<a href="{{ path('assogest_website_event_detail', {id:event.id}) }}">
+						 		<h4>{{ event.name }}</h4>
+						 		{{ event.description }}
+					 		</a>
+					 	</td>
+					 	<td>{{ event.dueDate|date('d/m/Y') }}</td>
+					 	<td>{{ event.address }}</td>
+					 </tr>
+					{% endfor %}
+				
+				</tbody>
+			
+			</table>
+		</div>
+	
+	</div>
+	
+
+{% endblock %}

@@ -1,0 +1,10 @@
+{% extends 'AssogestWebsiteBundle::Public/layout.html.twig' %}
+
+{% block body %}
+
+<a href="{{ path('assogest_website_events') }}" class="btn btn-default btn-mini">Retour</a><br />
+<h1>Créer évènement</h1>
+
+{{ form(form) }}
+
+{% endblock %}

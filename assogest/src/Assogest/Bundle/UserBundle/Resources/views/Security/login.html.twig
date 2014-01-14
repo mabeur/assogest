@@ -1,0 +1,52 @@
+{% extends 'AssogestWebsiteBundle::Public/layout.html.twig' %}
+
+
+{% trans_default_domain 'FOSUserBundle' %}
+
+{% block body %}
+{% if error %}
+    <div>{{ error|trans }}</div>
+{% endif %}
+
+<div class="row">
+	<div class="col-sm-6">
+		<h2>Connexion</h2>
+		<form action="{{ path("fos_user_security_check") }}" method="post" class="well form-horizontal" role="form">
+		    <input type="hidden" name="_csrf_token" value="{{ csrf_token }}" />
+		  <div class="form-group">
+		    <label for="username" class="col-xs-3 control-label">Email</label>
+		    <div class="col-xs-9">
+		   	  <input type="email" class="form-control" id="username" name="_username" value="{{ last_username }}" required="required" />
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <label for="password" class="col-xs-3 control-label">Mot de passe</label>
+		    <div class="col-xs-9">
+		      <input type="password"class="form-control" id="password" name="_password" required="required" />
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <div class="col-sm-offset-2 col-xs-9">
+		      <div class="checkbox">
+		        <label>
+		          <input type="checkbox" name="_remember_me"> Remember me
+		        </label>
+		      </div>
+		    </div>
+		  </div>
+		  <div class="form-group">
+		    <div class="col-sm-offset-2 col-sm-10">
+		      <button type="submit" class="btn btn-primary">Sign in</button>
+		    </div>
+		  </div>
+		</form>
+	</div> 
+	
+	<div class="col-sm-6">
+		<h3>Depuis réseau sociaux<h3>
+    	<a class="btn btn-danger" href="{{ hwi_oauth_login_url('google') }}">{{ 'google' | trans({}, 'HWIOAuthBundle') }}</a> <br />
+	</div>
+	
+</div>
+
+{% endblock body %}

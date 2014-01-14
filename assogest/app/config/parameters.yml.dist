@@ -13,3 +13,5 @@ parameters:
     locale: en
     secret: ThisTokenIsNotSoSecretChangeIt
     assogest_website_name: Turinaz
+    google_app_id: 702209717375.apps.googleusercontent.com
+    google_app_secret: lDKYARiceI2q7EBO6cgMk-z_

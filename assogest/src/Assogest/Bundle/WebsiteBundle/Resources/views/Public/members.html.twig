@@ -31,7 +31,7 @@
 				 <tr>
 				 	<td>
 				 		<a href="{{ path('admin_member_create', {id:member.id}) }}">
-				 			<img src="{{ member.avatar ? member.avatar : '/assogest/bundles/assogestwebsite/img/mini_no_avatar.png' }}" class="thumbnail" width="32"/>
+				 			<img src="{{ member.avatar ? member.avatar : '/bundles/assogestwebsite/img/mini_no_avatar.png' }}" class="thumbnail" width="32"/>
 				 		</a>
 				 	</td>
 				 	<td>{{ member.lastname }}</td>
@@ -114,7 +114,7 @@
 		initialize();
 		
 		{% for member in membersList %}		
-			addPeoplePosition("{{ member.address|e('js') }}","{{ member.presentation }}","{{ member.avatar ? member.avatar : '/assogest/bundles/assogestwebsite/img/mini_no_avatar.png' }}");
+			addPeoplePosition("{{ member.address|e('js') }}","{{ member.presentation }}","{{ member.avatar ? member.avatar : '/bundles/assogestwebsite/img/mini_no_avatar.png' }}");
 		{% endfor %}
 				
 	});

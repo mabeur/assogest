@@ -3,7 +3,7 @@ Assogest
 
 1) Installation
 ----------------
-* git clone https://github.com/mabeur/assogest/tree/master/assogest
+* git clone https://github.com/mabeur/assogest.git
 * modifier le fichier app/parameters.yml avec les valeurs voulues ( database / google app )
 * php composer.phar update
 * php app/console doctrine:database:create

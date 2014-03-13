@@ -43,7 +43,7 @@
 					        	 <li><a href="{{ path('assogest_website_presentation') }}"><div class="presentation"></div></a></li>
 							     <li><a href="{{ path('assogest_website_events') }}"><div class="avenir"></div></a></li>
 							     <li><a href="{{ path('assogest_website_members') }}"><div class="membres"></div></li>
-							     <li><a href="{{ path('assogest_website_documents') }}"><div class="documents"></div></a></li>
+							     <li><a href="{{ path('assogest_website_documents') }}">{{ asset('bundles/assogestwebsite/img/document_men.png') }}</a></li>
 					        </ul>
 		        	{% if app.user %}
 						<a href="{{ path('fos_user_security_logout') }}" class="hidden-xs btn btn-warning btn-small pull-right navbar-btn " style="margin-right:10px;" >Déconnexion</a>

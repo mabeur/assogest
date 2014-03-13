@@ -34,7 +34,6 @@
 						<a href="{{ path('fos_user_profile_show') }}" class="visible-xs btn btn-default btn-small pull-right navbar-btn " style="margin-right:10px;" >{{ app.user.presentation }}</a>
 		        		{% else %}
 						<a href="{{ path('fos_user_security_login') }}" class=" visible-xs btn btn-primary btn-small pull-right navbar-btn " style="margin-right:10px;" >Connexion</a>
-						<a href="{{ path('fos_user_security_create') }}" class="hidden-xs btn btn-primary btn-small pull-right navbar-btn " style="margin-right:10px;" >Inscription</a>
 		        	{% endif %}
 		        		<a class="navbar-brand" href="/"><img src="{{ asset('bundles/assogestwebsite/img/logo.png') }}"  ></a>
 		        	</div>
@@ -51,7 +50,7 @@
 						<a href="{{ path('fos_user_profile_show') }}" class="hidden-xs btn btn-default btn-small pull-right navbar-btn " style="margin-right:10px;" >{{ app.user.presentation }}</a>
 						{% else %}
 						<a href="{{ path('fos_user_security_login') }}" class="hidden-xs btn btn-primary btn-small pull-right navbar-btn " style="margin-right:10px;" >Connexion</a>
-						<a href="{{ path('fos_user_security_create') }}" class="hidden-xs btn btn-primary btn-small pull-right navbar-btn " style="margin-right:10px;" >Inscription</a>
+
 		        	{% endif %}
 							   
 					</div>

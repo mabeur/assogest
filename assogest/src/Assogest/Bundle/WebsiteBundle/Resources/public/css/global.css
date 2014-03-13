@@ -8,14 +8,14 @@ float:left;
 width:101px;
 height:142px;
 margin-right:5px;
-background-image: url('/img/presentation_men.png');
+background-image: url('/bundles/assogestwebsite/img/presentation_men.png');
 background-repeat:no-repeat;
 }
 
 .presentation:hover{
 width:101px;
 height:142px;
-background-image: url('/img/presentation_men_selec.png');
+background-image: url('/bundles/assogestwebsite/img/presentation_men_selec.png');
 background-repeat:no-repeat;
 }
 
@@ -23,74 +23,47 @@ background-repeat:no-repeat;
 float:left;
 width:101px;
 height:142px;
-background-image: url('/img/avenir_men.png');
+margin-right:5px;
+background-image: url('/bundles/assogestwebsite/img/avenir_men.png');
 background-repeat:no-repeat;
 }
 
 .avenir:hover{
 width:101px;
 height:142px;
-background-image: url('/img/avenir_men_selec.png');
-background-repeat:no-repeat;
-}
-
-.passes{
-float:left;
-width:101px;
-height:142px;
-background-image: url('/img/passes_men.png');
-background-repeat:no-repeat;
-}
-
-.passes:hover{
-width:101px;
-height:142px;
-background-image: url('/img/passes_men_selec.png');
+background-image: url('/bundles/assogestwebsite/img/avenir_men_selec.png');
 background-repeat:no-repeat;
 }
 
 .membres{
 float:left;
+margin-right:5px;
 width:101px;
 height:142px;
-background-image: url('/img/membres_men.png');
+background-image: url('/bundles/assogestwebsite/img/membres_men.png');
 background-repeat:no-repeat;
 }
 
 .membres:hover{
 width:101px;
 height:142px;
-background-image: url('/img/membres_men_selec.png');
-background-repeat:no-repeat;
-}
-
-.perso{
-float:left;
-width:101px;
-height:142px;
-background-image: url('/img/perso_men.png');
-background-repeat:no-repeat;
-}
-
-.perso:hover{
-width:101px;
-height:142px;
-background-image: url('/img/perso_men_selec.png');
+background-image: url('/bundles/assogestwebsite/img/membres_men_selec.png');
 background-repeat:no-repeat;
 }
 
 .documents{
 float:left;
 width:101px;
+margin-right:5px;
 height:142px;
-background-image: url('/img/documents_men.png');
+background-image: url('/bundles/assogestwebsite/img/documents_men.png');
 background-repeat:no-repeat;
 }
 
 .documents:hover{
 width:101px;
 height:142px;
-background-image: url('/img/documents_men_selec.png');
+background-image: url('/bundles/assogestwebsite/img/documents_men_selec.png');
 background-repeat:no-repeat;
 }
 
